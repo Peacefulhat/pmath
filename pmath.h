@@ -51,23 +51,23 @@ void vec_reflect_dampe2d(vec2 *result ,vec2 v, vec2 n, real damping);
 
 // initilize a vector
 #define VEC_INIT2D(vec, x, y) do { \
-    PMA_ASSERT((vec) != NULL); \
-    (vec)->x = (x); \
-    (vec)->y = (y); \
-} while(0)
+    PMA_ASSERT((vec) != NULL);     \
+    (vec)->x = (x);                \
+    (vec)->y = (y);                \
+  }while(0)
 
 // invert a vector
 #define VEC_INVERT2D(vec) do {\
-     PMA_ASSERT(vec!=NULL);\
-     (vec)->x=-(vec)->x;\
-     (vec)->y=-(vec)->y;\
+    PMA_ASSERT(vec!=NULL);    \
+    (vec)->x=-(vec)->x;       \
+    (vec)->y=-(vec)->y;       \
   }while(0)
 
 // scale multiplicaition
 #define VEC_SCALAR_MUL2D(vec,value) do{\
-  PMA_ASSERT(vec!=NULL);\
-  (vec)->x*=value;\
-  (vec)->y*=value;\
+    PMA_ASSERT(vec!=NULL);             \
+    (vec)->x*=value;                   \
+    (vec)->y*=value;                   \
   }while(0)
 
 #define VEC_PRINT2D(vec) printf("{x: %f, y: %f}\n", (vec)->x, (vec)->y)
@@ -79,7 +79,7 @@ void vec_reflect_dampe2d(vec2 *result ,vec2 v, vec2 n, real damping);
 
 // calculate the magnitude
 real vec_mag2d(vec2 vec){
-    return real_sqrt(vec.x*vec.x+vec.y*vec.y);
+  return real_sqrt(vec.x*vec.x+vec.y*vec.y);
 }
 
 // normalize the vector (vector into unit vector)
@@ -120,7 +120,7 @@ void vec_scaled_add2d(vec2 *result,vec2 a, vec2 b, real scale){
 
 // dot product of two vectors
 real dot_product2d(vec2 a, vec2 b){
-    return(a.x*b.x)+(a.y*b.y);
+  return(a.x*b.x)+(a.y*b.y);
 }
 
 // dot product of two vectors with angle between them
@@ -174,15 +174,15 @@ real vec_ang_btw2d(vec2 a, vec2 b){
 
 // translate vector by some offset
 void vec_translate2d(vec2 *vec, vec2 offset) {
-    PMA_ASSERT(vec != NULL);
-    vec->x += offset.x;
-    vec->y += offset.y;
+  PMA_ASSERT(vec != NULL);
+  vec->x += offset.x;
+  vec->y += offset.y;
 }
 
 // scale a vector by scaling factor;
 void vec_scale2d(vec2 *vec, real scale) {
-    PMA_ASSERT(vec != NULL);
-    VEC_SCALAR_MUL2D(vec, scale);
+  PMA_ASSERT(vec != NULL);
+  VEC_SCALAR_MUL2D(vec, scale);
 }
 
 
@@ -230,16 +230,16 @@ void vec_midpoint2d(vec2 *result, vec2 a, vec2 b){
 
 // clamp vector value with in a range
 void vec_clamp2d(vec2 *result, real min, real max) {
-    PMA_ASSERT(result != NULL);
-    result->x = fmaxf(min, fminf(result->x, max));
-    result->y = fmaxf(min, fminf(result->y, max));
+  PMA_ASSERT(result != NULL);
+  result->x = fmaxf(min, fminf(result->x, max));
+  result->y = fmaxf(min, fminf(result->y, max));
 }
 
 // component wise multiplication
 void vec_mul2d(vec2* result,vec2 a, vec2 b){
-    PMA_ASSERT(result != NULL);
-    result->x = a.x * b.x;
-    result->y = a.y * b.y;
+  PMA_ASSERT(result != NULL);
+  result->x = a.x * b.x;
+  result->y = a.y * b.y;
 }
 
 // component wise division
@@ -254,16 +254,16 @@ void vec_div2d(vec2* result, vec2 a, vec2 b)
 
 // angle of single vector
 real vec_angle2d(vec2 vec) {
-    return atan2f(vec.y, vec.x);
+  return atan2f(vec.y, vec.x);
 }
 
 // damp the reflected vector
 void vec_reflect_dampe2d(vec2 *result ,vec2 v, vec2 n, real damping){
-    PMA_ASSERT(result != NULL);
-    real v_dot_n = dot_product2d(v, n);
-    VEC_SCALAR_MUL2D(&n, 2 * v_dot_n);
-    vec_sub2d(result, v, n);
-    VEC_SCALAR_MUL2D(result, damping);
+  PMA_ASSERT(result != NULL);
+  real v_dot_n = dot_product2d(v, n);
+  VEC_SCALAR_MUL2D(&n, 2 * v_dot_n);
+  vec_sub2d(result, v, n);
+  VEC_SCALAR_MUL2D(result, damping);
 }
 
 // gives a unit vector perpendicluar to vector
@@ -277,19 +277,19 @@ void vec_unit_normal2d(vec2 *result, vec2 vec){
 
 // Compute the signed angle between two vectors
 real vec_signed_angle2d(vec2 a, vec2 b) {
-    return atan2f(cross_product2d(a, b), dot_product2d(a, b));
+  return atan2f(cross_product2d(a, b), dot_product2d(a, b));
 }
 
 // using epsilon based comparion for smaller value to aviod floating point precision erros
 
 // is zero vector?
 bool vec_is_zero2d(vec2 vec) {
-    return (fabsf(vec.x) < PMA_EPSILON) && (fabsf(vec.y) < PMA_EPSILON);
+  return (fabsf(vec.x) < PMA_EPSILON) && (fabsf(vec.y) < PMA_EPSILON);
 }
 
 
 bool vec_equal2d(vec2 a, vec2 b) {
-    return (fabsf(a.x - b.x) < PMA_EPSILON) && (fabsf(a.y - b.y) < PMA_EPSILON);
+  return (fabsf(a.x - b.x) < PMA_EPSILON) && (fabsf(a.y - b.y) < PMA_EPSILON);
 }
 
 #endif//PMATH_IMP
